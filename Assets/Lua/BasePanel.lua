@@ -7,14 +7,17 @@ BasePanel.panelObj = nil ---@class GameObject
 --模拟一个字典，键为控件名，值为字典本身
 BasePanel.controls = {}
 
+--事件监听标识
+BasePanel.isInitEvent = false
+
 --共有方法
 function BasePanel:Init(panelName)
     if self.panelObj == nil then
         
         --实例化面板对象
-        panelObj = ABMgr:LoadRes("ui", panelName, typeof(GameObject))
+        self.panelObj = ABMgr:LoadRes("ui", panelName, typeof(GameObject))
         self.panelObj.transform:SetParent(Canvas, false)
-
+        
         --找控件
         --用GetComponentsInChildren(typeof(脚本名))找到某对象下挂载了某脚本的所有对象
         --所有的可交互控件的父类都是UIBehaviour，所以只需要写GetComponentsInChildren("UIBehaviour")
@@ -52,7 +55,7 @@ function BasePanel:Init(panelName)
                 --]]
                 if self.controls[controlsName]~=nil then
                     --通过自定义索引的形式去添加一个新的成员变量
-                    allControlsList[controlsName][typeName] = allControlsList[i]
+                    self.controls[controlsName][typeName] = allControlsList[i]
                 else
                     self.controls[controlsName] = { [typeName] = allControlsList[i]}
                 end
@@ -75,8 +78,8 @@ function BasePanel:GetControls(controlName,typeName)
     return nil
 end
 
-function BasePanel:ShowMe()
-    self:Init()
+function BasePanel:ShowMe(name)
+    self:Init(name)
     self.panelObj:SetActive(true)
 end
 

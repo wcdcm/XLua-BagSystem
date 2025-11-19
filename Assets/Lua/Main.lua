@@ -12,14 +12,11 @@ require("ItemData")
 require("PlayerData")
 PlayerData:Init()
 
---初始化主面板
-require("MainPanel")
 
---初始化ItemGrid表
-require("ItemGrid")
-
---初始化背包面板
-require("BagPanel")
+require("BasePanel")--初始化面板基类
+require("MainPanel")--初始化主面板
+require("BagPanel")--初始化背包面板
+require("ItemGrid")--初始化ItemGrid表
 
 
-MainPanel:ShowMe()
+MainPanel:ShowMe("MainPanel")
