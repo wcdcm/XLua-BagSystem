@@ -6,6 +6,5 @@ public class Main : MonoBehaviour
     {
         LuaMgr.GetInstance().Init();
         LuaMgr.GetInstance().DoLuaFile("Main");
-        //this.gameObject.GetType().Name;
     }
 }
